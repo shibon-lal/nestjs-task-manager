@@ -39,12 +39,8 @@ src/
 │   ├── interfaces/
 │   └── utils/
 │
-├── config/
 │
-└── database/
-    ├── migrations/
-    ├── seeders/
-    └── database.module.ts
+└── config/
 ```
 
 ---
