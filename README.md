@@ -297,6 +297,33 @@ import { UsersModule } from '@domains/users/users.module';
 
 ---
 
+## 🏗 Creating Migrations
+
+Generate a migration from entity changes:
+
+```bash
+npm run migration:generate -- src/migrations/CreateUsersTable
+```
+
+Create an empty migration:
+
+```bash
+npm run migration:create -- src/migrations/CreateUsersTable
+```
+
+## ▶️ Running Migrations
+
+```bash
+npm run migration:run
+```
+
+## ⏪ Reverting Migrations
+
+```bash
+npm run migration:revert
+```
+---
+
 ## Future Enhancements
 
 - Swagger/OpenAPI integration
