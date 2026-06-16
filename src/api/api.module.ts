@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -7,8 +8,12 @@ import { appConfigSchema } from '@/config/config.types';
 import { typeOrmConfig } from '@/config/database.config';
 import { authConfig } from '@/config/auth.config';
 import { TypedConfigService } from '@/config/typed-config.service';
+import { JwtService } from '@nestjs/jwt';
 
 import { ApiController } from './api.controller';
+import { AuthModule } from '@/domains/auth/auth.module';
+import { UserModule } from '@/domains/users/user.module';
+import { AuthGuard } from '@/shared/guard/auth.guard';
 
 @Module({
   imports: [
@@ -17,7 +22,7 @@ import { ApiController } from './api.controller';
       inject: [ConfigService],
       useFactory: (configService: TypedConfigService) => ({
         ...configService.get('database'),
-        entities: [],
+        autoLoadEntities: true,
       }),
     }),
     ConfigModule.forRoot({
@@ -29,6 +34,15 @@ import { ApiController } from './api.controller';
         abortEarly: true,
       },
     }),
+    AuthModule,
+    UserModule,
+  ],
+  providers: [
+    JwtService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
   controllers: [ApiController],
 })
