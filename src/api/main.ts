@@ -3,11 +3,13 @@ import { ValidationPipe, BadRequestException } from '@nestjs/common';
 
 import { ApiModule } from './api.module';
 import { ResponseInterceptor } from '@/shared/interceptors/response.interceptor';
+import { HttpExceptionFilter } from '@/shared/exception/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
   app.setGlobalPrefix('api');
   app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -27,7 +29,6 @@ async function bootstrap() {
 
           if (message) {
             formatted[field] = message;
-            console.log(formatted, field);
           }
         });
         return new BadRequestException({

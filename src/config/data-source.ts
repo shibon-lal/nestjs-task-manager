@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -14,4 +15,5 @@ export const AppDataSource = new DataSource({
   migrations: ['src/migrations/*{.ts,.js}'],
 
   synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
 });

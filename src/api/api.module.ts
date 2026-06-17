@@ -10,11 +10,12 @@ import { authConfig } from '@/config/auth.config';
 import { TypedConfigService } from '@/config/typed-config.service';
 import { JwtService } from '@nestjs/jwt';
 
+import { AuthGuard } from '@/shared/guard/auth.guard';
+
 import { ApiController } from './api.controller';
 import { AuthModule } from '@/domains/auth/auth.module';
 import { UserModule } from '@/domains/users/user.module';
-import { AuthGuard } from '@/shared/guard/auth.guard';
-
+import { TaskModule } from '@/domains/tasks/task.module';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -36,6 +37,7 @@ import { AuthGuard } from '@/shared/guard/auth.guard';
     }),
     AuthModule,
     UserModule,
+    TaskModule,
   ],
   providers: [
     JwtService,
