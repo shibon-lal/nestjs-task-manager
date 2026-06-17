@@ -7,7 +7,6 @@ export class UsersController {
 
   @Get()
   findAll() {
-    console.log('hey users');
     return this.userService.getUsers();
   }
 }

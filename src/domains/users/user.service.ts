@@ -13,7 +13,6 @@ export class UserService {
   ) {}
 
   public async createUser(createUserDto: CreateUserDto): Promise<User> {
-    console.log(createUserDto);
     const hashedPassword = await this.passwordService.hash(
       createUserDto.password,
     );
