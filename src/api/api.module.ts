@@ -16,6 +16,7 @@ import { ApiController } from './api.controller';
 import { AuthModule } from '@/domains/auth/auth.module';
 import { UserModule } from '@/domains/users/user.module';
 import { TaskModule } from '@/domains/tasks/task.module';
+import { ReminderModule } from '@/domains/reminders/reminder.module';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -38,6 +39,7 @@ import { TaskModule } from '@/domains/tasks/task.module';
     AuthModule,
     UserModule,
     TaskModule,
+    ReminderModule,
   ],
   providers: [
     JwtService,
