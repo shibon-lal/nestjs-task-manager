@@ -4,7 +4,7 @@ import { CreateReminderDto } from '@/domains/reminders/dto/create-reminder.dto';
 import { ReminderService } from '@/domains/reminders/reminder.service';
 import { ApiResponse } from '@/shared/interceptors/response.interceptor';
 import { ReminderResponseDto } from '@/domains/reminders/dto/reminder-response.dto';
-import { TaskListDto } from '@/domains/tasks/dto/task-list.dto';
+import { ListDto } from '@/shared/dto/list.dto';
 import { FindOneParams } from '@/shared/params/find-one.params';
 import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';
 
@@ -14,7 +14,7 @@ export class RemindersController {
 
   @Get()
   async findAll(
-    @Query() query: TaskListDto,
+    @Query() query: ListDto,
     @CurrentUserId() userId: number,
   ): Promise<ApiResponse<ReminderResponseDto[]>> {
     const { reminders, total } = await this.reminderService.findAll(
@@ -49,7 +49,7 @@ export class RemindersController {
 
     return {
       success: true,
-      message: 'Task fetched successfully',
+      message: 'Reminder fetched successfully',
       data: ReminderResponseDto.fromEntity(reminder),
     };
   }
@@ -65,7 +65,7 @@ export class RemindersController {
     });
     return {
       success: true,
-      message: 'Task created successfully',
+      message: 'Reminder created successfully',
       data: ReminderResponseDto.fromEntity(reminder),
     };
   }
