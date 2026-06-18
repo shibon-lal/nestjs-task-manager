@@ -7,9 +7,12 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import { User } from '../../users/entities/user.entity';
+import { Reminder } from '../../reminders/entities/reminder.entity';
+
 import { TaskStatus } from '../enum/task-status.enum';
 
 @Entity('tasks')
@@ -51,4 +54,7 @@ export class Task {
 
   @DeleteDateColumn()
   deletedAt!: Date | null;
+
+  @OneToMany(() => Reminder, (reminder) => reminder.task)
+  reminders?: Reminder[];
 }

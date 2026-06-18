@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, BadRequestException } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 
 import { ApiModule } from './api.module';
 import { ResponseInterceptor } from '@/shared/interceptors/response.interceptor';
@@ -15,28 +15,6 @@ async function bootstrap() {
       whitelist: true,
       // forbidNonWhitelisted: true,
       transform: true,
-      exceptionFactory: (errors) => {
-        const formatted: Record<string, string> = {};
-
-        errors.forEach((err) => {
-          if (!err.constraints) return;
-
-          const field = err.property;
-
-          const firstConstraintKey = Object.keys(err.constraints)[0];
-          const message = err.constraints[firstConstraintKey];
-          console.log(message);
-
-          if (message) {
-            formatted[field] = message;
-          }
-        });
-        return new BadRequestException({
-          success: false,
-          message: 'Validation failed',
-          errors: formatted,
-        });
-      },
     }),
   );
 
