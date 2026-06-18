@@ -1,6 +1,8 @@
-# NestJS API + CLI Architecture
+# NestJS API + CLI Architecture + NestJs demo folder structure + NestJS Study
 
 This project separates the HTTP API and CLI applications while sharing the same domain and business logic.
+
+Nestjs demo project as pro level
 
 ## Project Structure
 
@@ -322,6 +324,7 @@ npm run migration:run
 ```bash
 npm run migration:revert
 ```
+
 ---
 
 ## Future Enhancements
