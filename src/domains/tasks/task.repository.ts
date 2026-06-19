@@ -15,6 +15,10 @@ export class TaskRepository {
     return this.repo.save(data);
   }
 
+  async update(id: number, data: Partial<Task>) {
+    return this.repo.update(id, data);
+  }
+
   async findPaginated(userId: number, page: number, perPage: number) {
     console.log(userId);
     return this.repo.findAndCount({

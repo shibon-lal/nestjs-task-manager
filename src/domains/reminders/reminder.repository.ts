@@ -15,6 +15,9 @@ export class ReminderRepository {
     return this.repo.save(data);
   }
 
+  async update(id: number, data: Partial<Reminder>) {
+    return this.repo.update(id, data);
+  }
   async findPaginated(userId: number, page: number, perPage: number) {
     return this.repo.findAndCount({
       where: {
