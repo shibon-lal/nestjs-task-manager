@@ -327,6 +327,10 @@ npm run migration:revert
 
 ---
 
+## License
+
+## This project is licensed under the MIT License
+
 ## Future Enhancements
 
 - Swagger/OpenAPI integration
