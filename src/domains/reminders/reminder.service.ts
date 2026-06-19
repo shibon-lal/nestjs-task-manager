@@ -62,7 +62,8 @@ export class ReminderService {
 
     reminder.status = status;
 
-    return await this.taskRepo.update(reminder.id, reminder);
+    await this.taskRepo.update(reminder.id, reminder);
+    return reminder;
   }
 
   async changePriority(id: number, priority: ReminderPriority, userId: number) {
@@ -75,6 +76,9 @@ export class ReminderService {
       );
     }
 
-    return await this.taskRepo.update(reminder.id, reminder);
+    reminder.priority = priority;
+    await this.taskRepo.update(reminder.id, reminder);
+
+    return reminder;
   }
 }

@@ -61,6 +61,8 @@ export class TaskService {
 
     task.status = status;
 
-    return await this.taskRepo.update(task.id, task);
+    await this.taskRepo.update(task.id, task);
+
+    return task;
   }
 }
