@@ -4,7 +4,7 @@ import { CreateTaskDto } from '@/domains/tasks/dto/create-task.dto';
 import { TaskService } from '@/domains/tasks/task.service';
 import { ApiResponse } from '@/shared/interceptors/response.interceptor';
 import { TaskResponseDto } from '@/domains/tasks/dto/task-response.dto';
-import { TaskListDto } from '@/domains/tasks/dto/task-list.dto';
+import { ListDto } from '@/shared/dto/list.dto';
 import { FindOneParams } from '@/shared/params/find-one.params';
 import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';
 
@@ -14,7 +14,7 @@ export class TasksController {
 
   @Get()
   async findAll(
-    @Query() query: TaskListDto,
+    @Query() query: ListDto,
     @CurrentUserId() userId: number,
   ): Promise<ApiResponse<TaskResponseDto[]>> {
     const { tasks, total } = await this.taskService.findAll(

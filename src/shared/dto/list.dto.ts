@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsOptional, Min } from 'class-validator';
 
-export class TaskListDto {
+export class ListDto {
   @IsOptional()
   @Type(() => Number)
   @Min(1)
