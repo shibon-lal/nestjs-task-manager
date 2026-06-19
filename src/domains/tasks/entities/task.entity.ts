@@ -42,7 +42,7 @@ export class Task {
     length: 20,
     default: TaskStatus.PENDING,
   })
-  status!: string;
+  status!: TaskStatus;
   @Column({ type: 'timestamp', nullable: true })
   disabledAt!: Date | null;
 

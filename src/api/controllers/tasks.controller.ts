@@ -1,10 +1,20 @@
-import { Controller, Post, Body, Get, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Query,
+  Param,
+  Patch,
+  ParseIntPipe,
+} from '@nestjs/common';
 
 import { CreateTaskDto } from '@/domains/tasks/dto/create-task.dto';
 import { TaskService } from '@/domains/tasks/task.service';
 import { ApiResponse } from '@/shared/interceptors/response.interceptor';
 import { TaskResponseDto } from '@/domains/tasks/dto/task-response.dto';
 import { ListDto } from '@/shared/dto/list.dto';
+import { ChangeTaskStatusDto } from '@/domains/tasks/dto/change-task-status.dto';
 import { FindOneParams } from '@/shared/params/find-one.params';
 import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';
 
@@ -65,6 +75,21 @@ export class TasksController {
     return {
       success: true,
       message: 'Task created successfully',
+      data: TaskResponseDto.fromEntity(task),
+    };
+  }
+
+  @Patch(':id/status')
+  async changeStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: ChangeTaskStatusDto,
+    @CurrentUserId() userId: number,
+  ): Promise<ApiResponse<TaskResponseDto>> {
+    const task = await this.taskService.changeStatus(id, dto.status, userId);
+
+    return {
+      success: true,
+      message: 'Task status updated successfully',
       data: TaskResponseDto.fromEntity(task),
     };
   }
